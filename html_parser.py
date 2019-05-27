@@ -28,7 +28,7 @@ def get_discussions():
 # Checking if there are any new discussions
 def get_new_discussions():
     new_discussions = set()
-    with open('saved/discussions.txt', 'r') as inFile:
+    with open('discussions.txt', 'r') as inFile:
         new_discussions = get_discussions().difference(
             set(map(str.rstrip, inFile)))
     return new_discussions
@@ -36,5 +36,5 @@ def get_new_discussions():
 
 # Saving in out file
 def save_discussions():
-    with open('saved/discussions.txt', 'w') as outFile:
+    with open('discussions.txt', 'w') as outFile:
         print('\n'.join(get_discussions()), file=outFile)
