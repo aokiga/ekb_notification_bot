@@ -4,7 +4,6 @@ import telebot
 import html_parser
 
 bot = telebot.TeleBot(os.getenv("TOKEN"))
-telebot.apihelper.proxy = {'https': os.getenv("PROXY")}
 SITE_URL = "обсуждения.екатеринбург.рф"
 
 intro_new = """Добрый вечер.
