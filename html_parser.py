@@ -29,7 +29,10 @@ def get_discussions():
 def get_new_discussions():
     new_discussions = set()
     with open('discussions.txt', 'r') as inFile:
-        prev_discussions = eval(inFile.read())
+        try:
+            prev_discussions = eval(inFile.read())
+        except SyntaxError:
+            return get_discussions()
     new_discussions = get_discussions().difference(prev_discussions)
     return new_discussions
 
