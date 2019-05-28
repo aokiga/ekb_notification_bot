@@ -37,5 +37,5 @@ def get_new_discussions():
 # Saving in out file
 def save_discussions():
     with open('discussions.txt', 'w') as outFile:
-        print('\n'.join(map(lambda a : ' '.join(a), 
-            get_discussions())), file=outFile)
+        print('\n'.join(map(lambda a: ' '.join(a),
+              get_discussions())), file=outFile)
