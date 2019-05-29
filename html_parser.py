@@ -16,12 +16,16 @@ def get_html_tree():
 
 # Getting discussions links
 def get_discussions():
-    discussions = set()
+    discussions = []
     for table in get_html_tree().find_all(
             attrs={'class': 'ed-content js-tab2'}):
-        discuss_links = table.find_all('a')
-        for link in discuss_links:
-            discussions.add((link.text, link.attrs['href']))
+        for block in table.find_all(attrs={'class': 'title'}):
+            discuss_name = block.find('a')
+            discuss_date = block.find(attrs={'class': 'date'})
+            discussions.append((
+                discuss_name.text,
+                discuss_name.attrs['href'],
+                discuss_date.text))
     return discussions
 
 
@@ -33,7 +37,8 @@ def get_new_discussions():
             prev_discussions = eval(inFile.read())
         except SyntaxError:
             return get_discussions()
-    new_discussions = get_discussions().difference(prev_discussions)
+    new_discussions = [i for i in get_discussions()
+                       if i not in prev_discussions]
     return new_discussions
 
 
